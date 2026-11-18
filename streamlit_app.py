@@ -2,13 +2,12 @@ import streamlit as st
 from PIL import Image, ImageDraw
 import io
 
-st.set_page_config(page_title="Oyu.py – 35 Years of U.S.-Kazakhstan Partnership", layout="centered")
+st.set_page_config(page_title="Oyu.py", layout="centered")
 
 st.title("🇰🇿🇺🇸 Oyu.py: Code & Culture")
-st.markdown("### 35 Years of U.S.-Kazakhstan Partnership — Cultural Exchange & Innovation")
-st.write("Нажми кнопку ниже, чтобы запустить анимацию алгоритма Python в реальном времени!")
+st.write("`print('Hello, world!')` — с этого обычно начинается любой код. А этот проект начался с идеи объединить 35 лет партнерства США и Казахстана, традиционный орнамент и немного магии Python.")
 
-
+# Цветовая палитра
 TURQUOISE = "#2A9D8F"
 TERRACOTTA = "#E76F51"
 DEEP_BLUE = "#264653"
@@ -96,8 +95,8 @@ def draw_tile(draw, x, y, color_idx):
     draw_rhombus(draw, cx, cy, TILE_SIZE * 0.78, rhomb_col, CREAM)
     draw_oyu(draw, cx, cy, TILE_SIZE * 0.72, fill_col, CREAM)
 
-if st.button("▶ Запустить анимацию отрисовки узора"):
-    with st.spinner("Создание покадровой анимации..."):
+if st.button("Запустить компиляцию узора"):
+    with st.spinner("Загрузка модулей творчества..."):
         num_tiles = 16
         img_width = num_tiles * TILE_SIZE
         img_height = TILE_SIZE * 2
@@ -105,7 +104,6 @@ if st.button("▶ Запустить анимацию отрисовки узо�
         frames = []
         base_image = Image.new("RGB", (img_width, img_height), color=hex_to_rgb(BG_COLOR))
         
-        # Генерируем кадры пошагово
         for i in range(num_tiles + 1):
             frame = base_image.copy()
             draw = ImageDraw.Draw(frame)
@@ -117,20 +115,17 @@ if st.button("▶ Запустить анимацию отрисовки узо�
             
             frames.append(frame)
 
-      
         gif_buffer = io.BytesIO()
         frames[0].save(
             gif_buffer,
             format="GIF",
             save_all=True,
             append_images=frames[1:],
-            duration=150, 
+            duration=150,
             loop=0
         )
         gif_buffer.seek(0)
 
-        st.image(gif_buffer, caption="Анимация генерации орнамента Oyu.py", use_container_width=True)
-        st.success("Анимация успешно сгенерирована кодом!")
+        st.image(gif_buffer, use_container_width=True)
 
-st.markdown("---")
-st.markdown("**О проекте:** Этот проект объединяет историю Тараза, США и современные технологии с помощью Python.")
+st.write("Все угловые узоры и рамки на физической коробке скомпилированы и напечатаны с помощью этого скрипта.")
